@@ -24,19 +24,17 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
-            <?php if ($this->request->getSession()->read('Auth')): ?>
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <?php if ($this->request->getSession()->read('Auth')): ?>
                     <li class="nav-item bg-primary rounded ">
                         <a class="nav-link active text-light" aria-current="page" href="/">Registros</a>
                     </li>
-                </ul>
-            <?php else: ?>
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <?php else: ?>
 
-                </ul>
-            <?php endif; ?>
+                <?php endif; ?>
+            </ul>
             <form class="d-flex flex-column flex-md-row gap-3" role="search">
-                <input class="form-control me-2" type="buscar" placeholder="Buscar" aria-label="Buscar" />
+                <input class="form-control me-2" type="buscar" placeholder="Buscar Un negocio para reservar" aria-label="Buscar Un negocio para reservar" />
                 <button class="btn btn-outline-success" type="submit">Buscar</button>
 
                 <?php if ($this->request->getSession()->read('Auth')): ?>

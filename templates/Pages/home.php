@@ -16,19 +16,7 @@
  */
 
 
-use Cake\Cache\Cache;
-use Cake\Core\Configure;
-use Cake\Core\Plugin;
 use Cake\Datasource\ConnectionManager;
-use Cake\Error\Debugger;
-use Cake\Http\Exception\NotFoundException;
-
-// $this->extend(
-//     '../layout/TwitterBootstrap/signin'
-// );
-// Set title
-
-// $this->disableAutoLayout();
 
 $checkConnection = function (string $name) {
     $error = null;
@@ -53,11 +41,6 @@ $checkConnection = function (string $name) {
     return compact('connected', 'error');
 };
 
-if (!Configure::read('debug')) :
-    throw new NotFoundException(
-        'Please replace templates/Pages/home.php with your own version or re-enable debug mode.'
-    );
-endif;
 
 ?>
 <!DOCTYPE html>
@@ -70,12 +53,15 @@ endif;
 <body>
     <header>
         <?= $this->element('header') ?>
-
     </header>
     <main>
         <?= $this->element('hero') ?>
         <?= $this->element('carousel') ?>
+        <?= $this->element('pricing') ?>
     </main>
+    <footer>
+        <?= $this->element('footer') ?>
+    </footer>
 </body>
 
 </html>

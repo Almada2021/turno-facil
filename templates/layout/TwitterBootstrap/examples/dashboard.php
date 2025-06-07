@@ -1,7 +1,9 @@
 <?php
+
 /**
  * @var \Cake\View\View $this
  */
+
 use Cake\Core\Configure;
 
 $this->Html->css('BootstrapUI.dashboard', ['block' => true]);
@@ -13,6 +15,7 @@ $this->prepend(
 );
 $this->start('tb_body_start');
 ?>
+
 <body <?= $this->fetch('tb_body_attrs') ?>>
     <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
         <?= $this->Html->link(
@@ -23,8 +26,7 @@ $this->start('tb_body_start');
         <button
             class="navbar-toggler position-absolute d-md-none collapsed" type="button"
             data-bs-toggle="collapse" data-bs-target="#sidebarMenu"
-            aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation"
-        >
+            aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
@@ -48,21 +50,21 @@ $this->start('tb_body_start');
                             pt-3 pb-2 mb-3 border-bottom">
                     <h1 class="h2 page-header"><?= h($this->request->getParam('controller')) ?></h1>
                 </div>
-<?php
-/**
- * Default `flash` block.
- */
-if (!$this->fetch('tb_flash')) {
-    $this->start('tb_flash');
-    if (isset($this->Flash)) {
-        echo $this->Flash->render();
-    }
-    $this->end();
-}
-$this->end();
+                <?php
+                /**
+                 * Default `flash` block.
+                 */
+                if (!$this->fetch('tb_flash')) {
+                    $this->start('tb_flash');
+                    if (isset($this->Flash)) {
+                        echo $this->Flash->render();
+                    }
+                    $this->end();
+                }
+                $this->end();
 
-$this->start('tb_body_end');
-?>
+                $this->start('tb_body_end');
+                ?>
             </main>
         </div>
     </div>

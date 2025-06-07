@@ -9,7 +9,7 @@
     <header>
         <?= $this->element('header') ?>
     </header>
-    <div class="column column-80">
+    <div class="column column-80" style="min-height: 90vh;">
         <div class="users form content container">
             <?= $this->Form->create($user) ?>
             <div class="bg-light col  m-auto p-4  my-5 1">
@@ -50,3 +50,4 @@
         </div>
     </div>
 </div>
+<?= $this->element('footer') ?>
