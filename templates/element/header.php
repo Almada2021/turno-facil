@@ -39,8 +39,7 @@
 
                 <?php if ($this->request->getSession()->read('Auth')): ?>
                     <span class="nav-link text-center fw-light text-primary">
-                        Bienvenido
-                        <?= $this->request->getSession()->read('Auth')->email ?>
+                        <?= substr($this->request->getSession()->read('Auth')->name . $this->request->getSession()->read('Auth')->lastname, 0, 13) ?>
                     </span>
                     <button
                         class="btn btn-danger p-0 ">

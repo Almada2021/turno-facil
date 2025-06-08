@@ -58,6 +58,7 @@ $checkConnection = function (string $name) {
         <?= $this->element('hero') ?>
         <?= $this->element('carousel') ?>
         <?= $this->element('pricing') ?>
+        <?= $this->element('acordion') ?>
     </main>
     <footer>
         <?= $this->element('footer') ?>

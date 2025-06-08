@@ -17,6 +17,25 @@
                     <legend><?= __('Registrarse') ?></legend>
 
                     <?php
+                    echo $this->Form->control('name', [
+                        'type' => 'text',
+                        'autocomplete' => 'name',
+                        'label' => 'Nombre',
+                        'required' => true
+                    ]);
+                    echo $this->Form->control('lastname', [
+                        'type' => 'text',
+                        'autocomplete' => 'family-name',
+                        'label' => 'Apellido',
+                        'required' => true
+                    ]);
+                    echo $this->Form->control('phonenumber', [
+                        'type' => 'tel',
+                        'autocomplete' => 'tel',
+                        'label' => 'Teléfono',
+                        'required' => true,
+                        'placeholder' => 'Ej: 123-456-7890'
+                    ]);
                     echo $this->Form->control('email', [
                         'type' => 'email',
                         'autocomplete' => 'email',
@@ -34,7 +53,14 @@
                 <fieldset class="my-2 ">
 
                     <label for="terms">
-                        <input type="checkbox" id="terms" name="terms" value="false" aria-label="Acepto los términos y condiciones">
+                        <input
+                            required
+                            class="form-check-input"
+                            type="checkbox"
+                            id="terms"
+                            name="terms"
+                            value="true"
+                            aria-label="Acepto los términos y condiciones">
                         Al Marcar esta casilla, acepto los
                         <a href="<?= $this->Url->build('/documents/turno-facil-terminos-condiciones.pdf') ?>" target="_blank" rel="noopener noreferrer">
                             <strong>términos y condiciones</strong>

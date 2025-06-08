@@ -2,17 +2,26 @@
 <header>
     <?= $this->element('header') ?>
 </header>
-<div class="users form">
+<div class="users form ">
     <?= $this->Flash->render() ?>
-    <h3>Login</h3>
-    <?= $this->Form->create() ?>
-    <fieldset>
-        <legend><?= __('Please enter your username and password') ?></legend>
-        <?= $this->Form->control('email', ['required' => true]) ?>
-        <?= $this->Form->control('password', ['required' => true]) ?>
-    </fieldset>
-    <?= $this->Form->submit(__('Login')); ?>
-    <?= $this->Form->end() ?>
+    <div class="w-75 m-auto bg-light p-4 my-5">
+        <h3>Ingresar</h3>
 
-    <?= $this->Html->link("Add User", ['action' => 'add']) ?>
+        <?= $this->Form->create() ?>
+        <fieldset>
+            <legend><?= __('Por favor ingresa tus datos') ?></legend>
+            <?= $this->Form->control('email', ['required' => true, 'label' => 'Correo Electronico']) ?>
+            <?= $this->Form->control('password', ['required' => true, 'label' => 'Contraseña']) ?>
+        </fieldset>
+        <?= $this->Form->submit(__('Ingresar')); ?>
+        <?= $this->Form->end() ?>
+        <p class="mt-4">
+            ¿No tienes una cuenta?
+            <?= $this->Html->link("Registrarme", ['action' => 'add']) ?>
+            ¿Olvidaste tu contraseña?
+            <?= $this->Html->link("Recuperar", ['action' => 'add']) ?>
+        </p>
+
+    </div>
+
 </div>

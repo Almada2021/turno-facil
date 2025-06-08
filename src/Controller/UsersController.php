@@ -47,10 +47,16 @@ class UsersController extends AppController
         $user = $this->Users->newEmptyEntity();
         if ($this->request->is('post')) {
             $user = $this->Users->patchEntity($user, $this->request->getData());
+            if (!$this->request->getData()['terms']) {
+                $this->Flash->error(__('Debes aceptar los términos y condiciones para registrarte.'));
+                return;
+            }
             if ($this->Users->save($user)) {
-                $this->Flash->success(__('The user has been saved.'));
+                $this->Flash->success(__('Haz creado tu cuenta correctamente. Ahora puedes usar la plataforma.'));
+                // call logint with the user data
+                $this->Authentication->setIdentity($user);
 
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['controller' => 'Pages', 'action' => 'display']);
             }
             $this->Flash->error(__('The user could not be saved. Please, try again.'));
         }
@@ -71,6 +77,7 @@ class UsersController extends AppController
             $user = $this->Users->patchEntity($user, $this->request->getData());
             if ($this->Users->save($user)) {
                 $this->Flash->success(__('The user has been saved.'));
+                // call login method to authenticate the user after editing
 
                 return $this->redirect(['action' => 'index']);
             }
@@ -101,6 +108,12 @@ class UsersController extends AppController
     public function beforeFilter(\Cake\Event\EventInterface $event)
     {
         parent::beforeFilter($event);
+        if ($this->request->getParam('prefix') === 'add') {
+        }
+        // Los terminos y condiciones no deben ser protegidos por el FormProtection
+        // ya que es un checkbox que el usuario debe marcar para aceptar los terminos
+        // y condiciones antes de registrarse.
+        $this->FormProtection->setConfig('unlockedFields', ['terms']);
         // Configure the login action to not require authentication, preventing
         // the infinite redirect loop issue
         $this->Authentication->addUnauthenticatedActions(['login', 'add']);
