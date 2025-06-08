@@ -41,12 +41,16 @@ $checkConnection = function (string $name) {
     return compact('connected', 'error');
 };
 
-
 ?>
 <!DOCTYPE html>
 <html>
 
 <head>
+    <?= $this->Html->charset() ?>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <?= $this->Html->meta('description', 'TurnoFacil - Turnos Online') ?>
+    <?= $this->Html->css(['normalize.min']) ?>
+    <?php $this->assign('title', 'Turno Facil'); ?>
 
 </head>
 
