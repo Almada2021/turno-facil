@@ -73,4 +73,9 @@ class PagesController extends AppController
             throw new NotFoundException();
         }
     }
+    public function contact()
+    {
+        $this->set('title', 'Contacto');
+        return $this->render('contact');
+    }
 }

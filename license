@@ -2,7 +2,7 @@ Copyright (c) 2025, Tobías Almada
 
 Este software se proporciona de forma gratuita con fines educativos y personales.
 
-Se permite copiar, modificar y redistribuir este software **únicamente con fines no comerciales** y **manteniendo este aviso de copyright**.
+Se permite copiar, modificar y redistribuir este software **únicamente con fines no comerciales de reventa** y **manteniendo este aviso de copyright**.
 
 Queda estrictamente prohibido cualquier uso comercial de este software, total o parcial, sin una autorización explícita por escrito del autor.
 
@@ -21,6 +21,9 @@ Queda estrictamente prohibido cualquier uso comercial de este software, total o 
 El uso comercial solo será válido si:
 - El autor ha otorgado una **licencia comercial explícita por escrito**.
 - La empresa o entidad acepta los términos y condiciones acordados, incluyendo el **pago de regalías**, cuya tarifa será definida caso por caso por el autor.
+- Modificacion masiva de modelos rutas y codigo haciendo que el programa ya no sirva para el proposito original que es la reserva de servicios pero igual aplican regalias del 1% de los beneficios en tal caso, para una modificacion asi de masiva debe tener por lo menos 20 caracterisitcas de tipo feature grandes
+no debe tener ninguna referencia a turnofacil
+la estructura de rutas debe ser diferente
 
 ---
 
@@ -32,3 +35,6 @@ Para solicitar una licencia comercial o permiso de uso, escribir a:
 ---
 
 Este software NO es de dominio público ni open source. Su acceso no implica cesión de derechos ni autorización implícita para uso comercial.
+
+### Disclaimer
+es posible que incluyamos trampas para verificar si el codigo fue puesto en otro entorno de Produccion advertido queda

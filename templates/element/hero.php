@@ -3,7 +3,7 @@
         <h1 class="display-4 fw-bold">Bienvenido a Reserva TurnoFácil</h1>
         <p class="lead">Reserva tus turnos de manera rápida y sencilla. <br /> En La mejor plataforma 🇵🇾 de Reservas.</p>
 
-        <div class="d-flex justify-content-center gap-3 mt-4">
+        <div class="d-flex flex-column flex-md-row justify-content-center gap-3 mt-4">
             <a href="/reservar" class="btn btn-primary btn-lg">Reservar Ahora</a>
             <a href="/users/add" class="btn btn-secondary btn-lg">Registrar Mi Empresa</a>
         </div>
