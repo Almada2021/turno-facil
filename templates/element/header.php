@@ -1,7 +1,6 @@
 <?php
 // GET second parameter from url licke /contact  route be 'contact
 $route = $this->request->getParam('action');
-
 ?>
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
@@ -47,6 +46,10 @@ $route = $this->request->getParam('action');
     
                     <a class=" nav-link active text-dark fw-bold" aria-current="page" href="/">Registros</a>
                     </li>
+                    <li class="nav-item rounded d-flex align-items-center justify-content-md-center px-2 pt-1 <?= $route === 'myBusiness' ? '  text-decoration-underline' : '' ?>" ">
+<i class=" bi mx-2 bi-shop"></i>
+                        <a class=" nav-link active text-dark fw-bold " aria-current="page" href="/my-businesses">Negocios</a>
+                    </li>
                 <?php else: ?>
 
                     <li class="nav-item rounded d-flex align-items-center justify-content-md-center px-2 pt-1 <?= $route === 'contact' ? '  text-decoration-underline' : '' ?>">
@@ -70,7 +73,9 @@ $route = $this->request->getParam('action');
                 <button class="btn btn-outline-success" type="submit">Buscar</button>
 
                 <?php if ($this->request->getSession()->read('Auth')): ?>
-                    <span class="nav-link text-center fw-light text-primary">
+                    <span
+                        class="nav-link text-center fw-light text-primary"
+                        onclick="window.location.href='/users/profile'">
                         <?= substr($this->request->getSession()->read('Auth')->name . $this->request->getSession()->read('Auth')->lastname, 0, 13) ?>
                     </span>
                     <button

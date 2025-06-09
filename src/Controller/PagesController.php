@@ -47,6 +47,7 @@ class PagesController extends AppController
      */
     public function display(string ...$path): ?Response
     {
+        $this->Authorization->skipAuthorization();
         $this->set('title', 'Turno Facil');
         if (!$path) {
             return $this->redirect('/');
@@ -75,6 +76,8 @@ class PagesController extends AppController
     }
     public function contact()
     {
+        $this->Authorization->skipAuthorization();
+
         $this->set('title', 'Contacto');
         return $this->render('contact');
     }

@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Controller;
@@ -17,10 +18,26 @@ class BusinessController extends AppController
      */
     public function index()
     {
+        $this->Authorization->skipAuthorization();
         $query = $this->Business->find();
         $business = $this->paginate($query);
 
         $this->set(compact('business'));
+    }
+    public function myBusiness()
+    {
+        $this->Authorization->skipAuthorization();
+        $userId = $this->Authentication->getIdentity()->get('id');
+        // dd($userId);
+        // Obtén el ID del usuario autenticado
+        $query = $this->Business->find()
+            ->matching('UserBusiness', function ($q) use ($userId) {
+                return $q->where(['UserBusiness.user_id' => $userId]);
+            });
+        $business = $this->paginate($query);
+
+        $this->set(compact('business'));
+        return $this->render('index');
     }
 
     /**

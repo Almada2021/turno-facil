@@ -59,8 +59,6 @@ return function (RouteBuilder $routes): void {
          */
         $builder->connect('/', ['controller' => 'Pages', 'action' => 'display', 'home']);
         $builder->connect('/pages/contact', ['controller' => 'Pages', 'action' => 'contact', 'contact']);
-        $builder->connect('/pages/contact', ['controller' => 'Pages', 'action' => 'services', 'services']);
-
         /*
          * ...and connect the rest of 'Pages' controller's URLs.
          */
@@ -81,6 +79,7 @@ return function (RouteBuilder $routes): void {
          */
         $builder->fallbacks();
     });
+    $routes->connect('/my-businesses', ['controller' => 'Business', 'action' => 'myBusiness']);
 
     /*
      * If you need a different set of middleware or none at all,

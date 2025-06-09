@@ -70,6 +70,8 @@
                     <div class="card-header bg-warning text-dark text-center">
                         <h3 class="fw-bold">Plan Anual</h3>
                         <p class="mb-0">400.000 Gs / año</p>
+                        <span class="badge bg-success text-white text-dark">1 Mes Gratis de Prueba</span>
+
                     </div>
                     <div class="card-body">
                         <ul class="list-unstyled">

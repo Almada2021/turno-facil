@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Model\Table;
@@ -42,7 +43,10 @@ class BusinessTable extends Table
         $this->setTable('business');
         $this->setDisplayField('name');
         $this->setPrimaryKey('id');
-
+        $this->hasMany('UserBusiness', [
+            'foreignKey' => 'business_id',
+            'dependent' => true,
+        ]);
         $this->addBehavior('Timestamp');
     }
 
