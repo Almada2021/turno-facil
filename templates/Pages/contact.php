@@ -1,6 +1,12 @@
 <?php
 $this->assign('title', 'Contacto');
 $email =  'almadeussoftware@gmail.com';
+$phone = '+595975669884';
+$address = 'Asunción, Paraguay';
+$facebook = 'https://www.facebook.com/TurnoFacil';
+$twitter = 'https://twitter.com/TurnoFacil';
+$instagram = 'https://www.instagram.com/turnofacilpy/';
+
 ?>
 
 <head>

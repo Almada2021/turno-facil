@@ -53,6 +53,7 @@ class BusinessController extends AppController
      */
     public function view($id = null)
     {
+        $this->Authorization->skipAuthorization();
         $busines = $this->Business->get($id, contain: []);
         $this->set(compact('busines'));
     }
@@ -115,13 +116,17 @@ class BusinessController extends AppController
      */
     public function edit($id = null)
     {
-        $busines = $this->Business->get($id, contain: []);
+        $busines = $this->Business->get($id,  [
+            'contain' => ['UserBusiness'],
+        ]);
+        $this->Authorization->skipAuthorization();
         if ($this->request->is(['patch', 'post', 'put'])) {
             $busines = $this->Business->patchEntity($busines, $this->request->getData());
+            $this->Authorization->authorize($busines, 'edit');
             if ($this->Business->save($busines)) {
                 $this->Flash->success(__('The busines has been saved.'));
 
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['action' => 'myBusiness']);
             }
 
             $this->Flash->error(__('The busines could not be saved. Please, try again.'));

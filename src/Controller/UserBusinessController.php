@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Controller;
@@ -17,6 +18,17 @@ class UserBusinessController extends AppController
      */
     public function index()
     {
+        $this->Authorization->skipAuthorization();
+        $query = $this->UserBusiness->find()
+            ->contain(['Users', 'Businesses']);
+        $userBusiness = $this->paginate($query);
+
+        $this->set(compact('userBusiness'));
+    }
+    public function employees()
+    {
+        // TODO: Implement this public function employees() method.
+        $this->Authorization->skipAuthorization();
         $query = $this->UserBusiness->find()
             ->contain(['Users', 'Businesses']);
         $userBusiness = $this->paginate($query);
@@ -44,19 +56,42 @@ class UserBusinessController extends AppController
      */
     public function add()
     {
+        $this->Authorization->skipAuthorization();
         $userBusines = $this->UserBusiness->newEmptyEntity();
-        if ($this->request->is('post')) {
-            $userBusines = $this->UserBusiness->patchEntity($userBusines, $this->request->getData());
-            if ($this->UserBusiness->save($userBusines)) {
-                $this->Flash->success(__('The user busines has been saved.'));
+        $user = $this->UserBusiness->Users->newEmptyEntity();
 
-                return $this->redirect(['action' => 'index']);
+        if ($this->request->is('post')) {
+            // dd($this->request->getData());
+            // Remove business_id from user data and role
+            $data = $this->request->getData();
+            unset($data['business_id']);
+            unset($data['role']);
+            $user = $this->UserBusiness->Users->patchEntity($user, $data);
+            if ($this->UserBusiness->Users->save($user)) {
+                // Set business_id and role for userBusines
+                $data['user_id'] = $user->id;
+                $data['business_id'] = $this->request->getData('business_id');
+                $data['role'] = 'employee';
+                $userBusines = $this->UserBusiness->newEmptyEntity();
+                $userBusines = $this->UserBusiness->patchEntity($userBusines, $data);
+                if ($this->UserBusiness->save($userBusines)) {
+                    $this->Flash->success(__('The user busines has been saved.'));
+
+                    return $this->redirect(['action' => 'index']);
+                }
             }
-            $this->Flash->error(__('The user busines could not be saved. Please, try again.'));
+            // $userBusines = $this->UserBusiness->patchEntity($userBusines, $this->request->getData());
+            // if ($this->UserBusiness->save($userBusines)) {
+            //     $this->Flash->success(__('The user busines has been saved.'));
+
+            //     return $this->redirect(['action' => 'index']);
+            // }
+            // $this->Flash->error(__('The user busines could not be saved. Please, try again.'));
         }
-        $users = $this->UserBusiness->Users->find('list', limit: 200)->all();
+        // Send normal user form
+        $user = $this->UserBusiness->Users->newEmptyEntity();
         $businesses = $this->UserBusiness->Businesses->find('list', limit: 200)->all();
-        $this->set(compact('userBusines', 'users', 'businesses'));
+        $this->set(compact('user', 'userBusines', 'businesses'));
     }
 
     /**

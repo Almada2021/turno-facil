@@ -10,9 +10,9 @@
 </header>
 <div class="userBusiness index content">
     <?= $this->Html->link(__('New User Busines'), ['action' => 'add'], ['class' => 'button float-right']) ?>
-    <h3><?= __('Planilla') ?></h3>
+    <h3><?= __('User Business') ?></h3>
     <div class="table-responsive">
-        <table class="table table-striped">
+        <table>
             <thead>
                 <tr>
                     <th><?= $this->Paginator->sort('id') ?></th>

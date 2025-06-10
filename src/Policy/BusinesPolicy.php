@@ -28,7 +28,15 @@ class BusinesPolicy
      * @param \App\Model\Entity\Busines $busines
      * @return bool
      */
-    public function canEdit(IdentityInterface $user, Busines $busines) {}
+    public function canEdit(IdentityInterface $user, Busines $busines)
+    {
+        foreach ($busines->user_business as $relation) {
+            if ($relation->user_id === $user->id && $relation->role === 'owner') {
+                return true;
+            }
+        }
+        return false;
+    }
 
     /**
      * Check if $user can delete Busines

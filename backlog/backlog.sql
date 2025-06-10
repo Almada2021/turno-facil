@@ -125,3 +125,27 @@ VALUES
     ('Lite Plan', 200000, 'monthly'),
     ('Standard Plan Monthly', 400000, 'monthly'),
     ('Standard Plan Yearly', 4000000, 'yearly');
+
+-- Migrate
+CREATE TABLE subscriptions (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    plan_id INT NOT NULL,
+    start_date DATETIME DEFAULT CURRENT_TIMESTAMP,
+    end_date DATETIME,
+    status ENUM('active', 'inactive', 'cancelled') NOT NULL DEFAULT 'active',
+    created DATETIME DEFAULT CURRENT_TIMESTAMP,
+    modified DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    -- Claves foráneas
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+    FOREIGN KEY (plan_id) REFERENCES plans(id) ON DELETE CASCADE
+);
+
+-- Migrate
+CREATE TABLE plan_limits (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    plan_id INT NOT NULL,
+    accessor TEXT NOT NULL,
+    -- Claves foráneas
+    FOREIGN KEY (plan_id) REFERENCES plans(id) ON DELETE CASCADE
+);

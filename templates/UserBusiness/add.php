@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\UserBusines $userBusines
@@ -6,26 +7,71 @@
  * @var \Cake\Collection\CollectionInterface|string[] $businesses
  */
 ?>
+<?php
+
+/**
+ * @var \App\View\AppView $this
+ * @var \App\Model\Entity\User $user
+ */
+?>
 <div class="row">
-    <aside class="column">
-        <div class="side-nav">
-            <h4 class="heading"><?= __('Actions') ?></h4>
-            <?= $this->Html->link(__('List User Business'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
-        </div>
-    </aside>
-    <div class="column column-80">
-        <div class="userBusiness form content">
-            <?= $this->Form->create($userBusines) ?>
-            <fieldset>
-                <legend><?= __('Add User Busines') ?></legend>
-                <?php
-                    echo $this->Form->control('user_id', ['options' => $users]);
+    <header>
+        <?= $this->element('header') ?>
+    </header>
+    <div class="column column-80" style="min-height: 90vh;">
+        <div class="users form content container">
+            <?= $this->Form->create($user) ?>
+            <div class="bg-light col  m-auto p-4  my-5 1">
+                <fieldset>
+                    <legend><?= __('Registrar Empleado') ?></legend>
+
+                    <?php
+                    echo $this->Form->control('name', [
+                        'type' => 'text',
+                        'autocomplete' => 'name',
+                        'label' => 'Nombre',
+                        'required' => true
+                    ]);
+                    echo $this->Form->control('lastname', [
+                        'type' => 'text',
+                        'autocomplete' => 'family-name',
+                        'label' => 'Apellido',
+                        'required' => true
+                    ]);
+                    echo $this->Form->control('phonenumber', [
+                        'type' => 'tel',
+                        'autocomplete' => 'tel',
+                        'label' => 'Teléfono',
+                        'required' => true,
+                        'placeholder' => 'Ej: 123-456-7890'
+                    ]);
+                    echo $this->Form->control('email', [
+                        'type' => 'email',
+                        'autocomplete' => 'email',
+                        'label' => 'Correo Electrónico',
+                        'required' => true
+                    ]);
+                    echo $this->Form->control('password', [
+                        'type' => 'password',
+                        'autocomplete' => 'new-password',
+                        'label' => 'Contraseña',
+                        'required' => true
+                    ]);
+                    ?>
+                </fieldset>
+                <fieldset>
+                    <legend><?= __('Datos y Permisos') ?></legend>
+                    <?php
                     echo $this->Form->control('business_id', ['options' => $businesses]);
-                    echo $this->Form->control('role');
-                ?>
-            </fieldset>
-            <?= $this->Form->button(__('Submit')) ?>
-            <?= $this->Form->end() ?>
+                    echo $this->Form->control('role', ['options' => ['owner', 'employee']]);
+                    ?>
+                    <?= $this->Form->button(__('Registrarse'), [
+                        'class' => 'btn btn-primary w-100',
+                    ]) ?>
+                    <?= $this->Form->end() ?>
+            </div>
+
         </div>
     </div>
 </div>
+<?= $this->element('footer') ?>
