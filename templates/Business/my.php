@@ -8,21 +8,26 @@
 <header>
     <?= $this->element('header') ?>
 </header>
-<div class="business index content" style="min-height: 90vh;">
-    <?= $this->Html->link(__('New Busines'), ['action' => 'add'], ['class' => 'button float-right']) ?>
-    <h3><?= __('Negocios') ?></h3>
+<div class="business index content p-4" style="min-height: 90vh;">
+
+    <?= $this->Html->link(__('  Nuevo negocio'), ['action' => 'add'], [
+        'class' => 'btn btn-primary  bi bi-shop fw-bold ',
+        'title' => 'Para agregar un nuevo negocio haz click aqui',
+        'aria-label' => 'Agregar Tienda'
+    ]) ?>
+    <h3 class="mt-2"><?= __('Negocios') ?></h3>
     <div class="table-responsive">
-        <table>
+        <table class="table table-striped">
             <thead>
                 <tr>
                     <th><?= $this->Paginator->sort('id') ?></th>
-                    <th><?= $this->Paginator->sort('name') ?></th>
-                    <th><?= $this->Paginator->sort('address') ?></th>
-                    <th><?= $this->Paginator->sort('phone') ?></th>
-                    <th><?= $this->Paginator->sort('email') ?></th>
-                    <th><?= $this->Paginator->sort('created') ?></th>
-                    <th><?= $this->Paginator->sort('modified') ?></th>
-                    <th class="actions"><?= __('Actions') ?></th>
+                    <th><?= $this->Paginator->sort('name', 'Nombre') ?></th>
+                    <th><?= $this->Paginator->sort('address', 'Direccion') ?></th>
+                    <th><?= $this->Paginator->sort('phone', 'Telefono') ?></th>
+                    <th><?= $this->Paginator->sort('email', 'Correo') ?></th>
+                    <th><?= $this->Paginator->sort('created', 'creado') ?></th>
+                    <th><?= $this->Paginator->sort('modified', 'Modificado') ?></th>
+                    <th class="actions"><?= __('Acciones') ?></th>
                 </tr>
             </thead>
             <tbody>
@@ -54,13 +59,13 @@
     </div>
     <div class="paginator">
         <ul class="pagination">
-            <?= $this->Paginator->first('<< ' . __('first')) ?>
-            <?= $this->Paginator->prev('< ' . __('previous')) ?>
+            <?= $this->Paginator->first('<< ' . __('Primero')) ?>
+            <?= $this->Paginator->prev('< ' . __('Anterior')) ?>
             <?= $this->Paginator->numbers() ?>
-            <?= $this->Paginator->next(__('next') . ' >') ?>
-            <?= $this->Paginator->last(__('last') . ' >>') ?>
+            <?= $this->Paginator->next(__('Siguiente') . ' >') ?>
+            <?= $this->Paginator->last(__('Ultimo') . ' >>') ?>
         </ul>
-        <p><?= $this->Paginator->counter(__('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')) ?></p>
+        <p><?= $this->Paginator->counter(__('Pagina {{page}} de {{pages}}, Mostrado {{current}} registros de un total de {{count}} Tiendas')) ?></p>
     </div>
 </div>
 <footer>

@@ -4,6 +4,11 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use Exception;
+use PhpParser\Node\Stmt\TryCatch;
+use Authorization\Exception\ForbiddenException;
+use Authorization\Exception\MissingIdentityException;
+
 /**
  * Business Controller
  *
@@ -28,7 +33,6 @@ class BusinessController extends AppController
     {
         $this->Authorization->skipAuthorization();
         $userId = $this->Authentication->getIdentity()->get('id');
-        // dd($userId);
         // Obtén el ID del usuario autenticado
         $query = $this->Business->find()
             ->matching('UserBusiness', function ($q) use ($userId) {
@@ -37,7 +41,7 @@ class BusinessController extends AppController
         $business = $this->paginate($query);
 
         $this->set(compact('business'));
-        return $this->render('index');
+        return $this->render('my');
     }
 
     /**
@@ -60,17 +64,46 @@ class BusinessController extends AppController
      */
     public function add()
     {
-        $busines = $this->Business->newEmptyEntity();
-        if ($this->request->is('post')) {
-            $busines = $this->Business->patchEntity($busines, $this->request->getData());
-            if ($this->Business->save($busines)) {
-                $this->Flash->success(__('The busines has been saved.'));
+        try {
 
-                return $this->redirect(['action' => 'index']);
+            $this->Authorization->skipAuthorization();
+            $busines = $this->Business->newEmptyEntity();
+            if ($this->request->is('post')) {
+                $busines = $this->Business->patchEntity($busines, $this->request->getData());
+                $userId = $this->Authentication->getIdentity()->get('id'); // Obtener el ID del usuario auten
+                // Crear asociación en UserBusiness con el rol 'owner'
+
+                if ($this->Business->save($busines)) {
+                    $userBusinessTable = $this->fetchTable('UserBusiness');
+                    $userBusiness = $userBusinessTable->newEntity([
+                        'user_id' => $userId,
+                        'business_id' => $busines->id,
+                        'role' => 'owner',
+                    ]);
+                    if ($userBusinessTable->save($userBusiness)) {
+                        $this->Flash->success(__('El negocio se creo y tu eres el Propietario!.'));
+                    } else {
+                        $this->Flash->error(__('Ocurrio un error al guardar.'));
+                    }
+
+
+                    return $this->redirect(['action' => 'myBusiness']);
+                }
+                $this->Flash->error(__('El negocio no pudo ser guardado. Por favor, intentalo de nuevo.'));
             }
-            $this->Flash->error(__('The busines could not be saved. Please, try again.'));
+            $this->set(compact('busines'));
+        } catch (Exception $error) {
+            if ($error instanceof ForbiddenException) {
+                $this->Flash->error('No tienes Permisos');
+                return $this->redirect(['action' => 'myBusiness']);
+            }
+            if ($error instanceof MissingIdentityException) {
+                $this->Flash->error('No estas registrado');
+                return $this->redirect(['controller' => 'Pages', 'action' => 'display']);
+            }
+
+            dd($error);
         }
-        $this->set(compact('busines'));
     }
 
     /**
@@ -90,6 +123,7 @@ class BusinessController extends AppController
 
                 return $this->redirect(['action' => 'index']);
             }
+
             $this->Flash->error(__('The busines could not be saved. Please, try again.'));
         }
         $this->set(compact('busines'));
@@ -104,14 +138,30 @@ class BusinessController extends AppController
      */
     public function delete($id = null)
     {
-        $this->request->allowMethod(['post', 'delete']);
-        $busines = $this->Business->get($id);
-        if ($this->Business->delete($busines)) {
-            $this->Flash->success(__('The busines has been deleted.'));
-        } else {
-            $this->Flash->error(__('The busines could not be deleted. Please, try again.'));
-        }
+        try {
 
-        return $this->redirect(['action' => 'index']);
+            $this->request->allowMethod(['post', 'delete']);
+            $busines = $this->Business->get($id, [
+                'contain' => ['UserBusiness'],
+            ]);
+            $this->Authorization->authorize($busines, 'delete');
+            if ($this->Business->delete($busines)) {
+                $this->Flash->success(__('El negocio se elimino.'));
+            } else {
+                $this->Flash->error(__('Por favor intentalo de vuelta.'));
+            }
+
+            return $this->redirect(['action' => 'myBusiness']);
+        } catch (Exception $error) {
+            if ($error instanceof ForbiddenException) {
+                $this->Flash->error('No tienes Permisos');
+                return $this->redirect(['action' => 'myBusiness']);
+            }
+            if ($error instanceof MissingIdentityException) {
+                $this->Flash->error('No estas registrado');
+                return $this->redirect(['controller' => 'Pages', 'action' => 'display']);
+            }
+            dd($error);
+        }
     }
 }

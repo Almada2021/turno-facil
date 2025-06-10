@@ -3,7 +3,7 @@
         <p class="mb-2">&copy; 2025 TurnoFácil. Todos los derechos reservados.</p>
         <ul class="list-inline">
             <li class="list-inline-item"><a href="/about" class="text-light">Acerca de</a></li>
-            <li class="list-inline-item"><a href="/contact" class="text-light">Contacto</a></li>
+            <li class="list-inline-item"><a href="/pages/contact" class="text-light">Contacto</a></li>
             <li class="list-inline-item"><a href="/documents/turno-facil-terminos-condiciones.pdf" class="text-light">Política de Privacidad</a></li>
         </ul>
 

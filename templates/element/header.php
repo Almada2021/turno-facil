@@ -46,8 +46,12 @@ $route = $this->request->getParam('action');
     
                     <a class=" nav-link active text-dark fw-bold" aria-current="page" href="/">Registros</a>
                     </li>
+                    <li class="nav-item rounded d-flex align-items-center justify-content-md-center px-2 pt-1 <?= $route === 'employee' ? '  text-decoration-underline' : '' ?>" ">
+                        <i class=" bi mx-2 bi-person-workspace"></i>
+                        <a class=" nav-link active text-dark fw-bold " aria-current="page" href="/employees">Empleados</a>
+                    </li>
                     <li class="nav-item rounded d-flex align-items-center justify-content-md-center px-2 pt-1 <?= $route === 'myBusiness' ? '  text-decoration-underline' : '' ?>" ">
-<i class=" bi mx-2 bi-shop"></i>
+                        <i class=" bi mx-2 bi-shop"></i>
                         <a class=" nav-link active text-dark fw-bold " aria-current="page" href="/my-businesses">Negocios</a>
                     </li>
                 <?php else: ?>

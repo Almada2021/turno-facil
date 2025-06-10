@@ -36,86 +36,92 @@ CREATE TABLE user_business (
     UNIQUE KEY unique_user_business (user_id, business_id)
 );
 
--- Crear índices para mejor rendimiento
-CREATE INDEX idx_user_business_user_id ON user_business(user_id);
+-- -- Crear índices para mejor rendimiento
+-- CREATE INDEX idx_user_business_user_id ON user_business(user_id);
+-- CREATE INDEX idx_user_business_business_id ON user_business(business_id);
+-- CREATE INDEX idx_user_business_role ON user_business(role);
+-- -- Ejemplos de consultas útiles:
+-- -- 1. Obtener todos los negocios de un usuario específico
+-- SELECT
+--     b.*,
+--     ub.role
+-- FROM
+--     business b
+--     INNER JOIN user_business ub ON b.id = ub.business_id
+-- WHERE
+--     ub.user_id = 1;
+-- -- 2. Obtener todos los empleados de un negocio específico
+-- SELECT
+--     u.*,
+--     ub.role
+-- FROM
+--     users u
+--     INNER JOIN user_business ub ON u.id = ub.user_id
+-- WHERE
+--     ub.business_id = 1;
+-- -- 3. Obtener solo los dueños de un negocio
+-- SELECT
+--     u.*,
+--     ub.role
+-- FROM
+--     users u
+--     INNER JOIN user_business ub ON u.id = ub.user_id
+-- WHERE
+--     ub.business_id = 1
+--     AND ub.role = 'owner';
+-- -- 4. Verificar si un usuario es dueño de algún negocio
+-- SELECT
+--     COUNT(*) as total_businesses_owned
+-- FROM
+--     user_business
+-- WHERE
+--     user_id = 1
+--     AND role = 'owner';
+-- -- 5. Obtener negocios donde el usuario es empleado
+-- SELECT
+--     b.*,
+--     ub.role
+-- FROM
+--     business b
+--     INNER JOIN user_business ub ON b.id = ub.business_id
+-- WHERE
+--     ub.user_id = 1
+--     AND ub.role = 'employee';
+-- -- Ejemplos de INSERT:
+-- -- Insertar un negocio
+-- INSERT INTO
+--     business (name, description, address, phone, email)
+-- VALUES
+--     (
+--         'Mi Restaurante',
+--         'Restaurante de comida casera',
+--         'Calle Principal 123',
+--         '555-0123',
+--         'info@mirestaurante.com'
+--     );
+-- -- Asociar un usuario como dueño de un negocio
+-- INSERT INTO
+--     user_business (user_id, business_id, role)
+-- VALUES
+--     (1, 1, 'owner');
+-- -- Asociar un usuario como empleado de un negocio
+-- INSERT INTO
+--     user_business (user_id, business_id, role)
+-- VALUES
+--     (2, 1, 'employee');
+CREATE TABLE plans (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    price INT NOT NULL,
+    duration ENUM('monthly', 'yearly') NOT NULL DEFAULT 'monthly',
+    created DATETIME DEFAULT CURRENT_TIMESTAMP,
+    modified DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
 
-CREATE INDEX idx_user_business_business_id ON user_business(business_id);
-
-CREATE INDEX idx_user_business_role ON user_business(role);
-
--- Ejemplos de consultas útiles:
--- 1. Obtener todos los negocios de un usuario específico
-SELECT
-    b.*,
-    ub.role
-FROM
-    business b
-    INNER JOIN user_business ub ON b.id = ub.business_id
-WHERE
-    ub.user_id = 1;
-
--- 2. Obtener todos los empleados de un negocio específico
-SELECT
-    u.*,
-    ub.role
-FROM
-    users u
-    INNER JOIN user_business ub ON u.id = ub.user_id
-WHERE
-    ub.business_id = 1;
-
--- 3. Obtener solo los dueños de un negocio
-SELECT
-    u.*,
-    ub.role
-FROM
-    users u
-    INNER JOIN user_business ub ON u.id = ub.user_id
-WHERE
-    ub.business_id = 1
-    AND ub.role = 'owner';
-
--- 4. Verificar si un usuario es dueño de algún negocio
-SELECT
-    COUNT(*) as total_businesses_owned
-FROM
-    user_business
-WHERE
-    user_id = 1
-    AND role = 'owner';
-
--- 5. Obtener negocios donde el usuario es empleado
-SELECT
-    b.*,
-    ub.role
-FROM
-    business b
-    INNER JOIN user_business ub ON b.id = ub.business_id
-WHERE
-    ub.user_id = 1
-    AND ub.role = 'employee';
-
--- Ejemplos de INSERT:
--- Insertar un negocio
 INSERT INTO
-    business (name, description, address, phone, email)
+    plans (name, price, duration)
 VALUES
-    (
-        'Mi Restaurante',
-        'Restaurante de comida casera',
-        'Calle Principal 123',
-        '555-0123',
-        'info@mirestaurante.com'
-    );
-
--- Asociar un usuario como dueño de un negocio
-INSERT INTO
-    user_business (user_id, business_id, role)
-VALUES
-    (1, 1, 'owner');
-
--- Asociar un usuario como empleado de un negocio
-INSERT INTO
-    user_business (user_id, business_id, role)
-VALUES
-    (2, 1, 'employee');
+    ('Free Plan', 0, 'monthly'),
+    ('Lite Plan', 200000, 'monthly'),
+    ('Standard Plan Monthly', 400000, 'monthly'),
+    ('Standard Plan Yearly', 4000000, 'yearly');

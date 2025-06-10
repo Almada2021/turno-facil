@@ -5,7 +5,7 @@
 
         <div class="d-flex flex-column flex-md-row justify-content-center gap-3 mt-4">
             <a href="/reservar" class="btn btn-primary btn-lg">Reservar Ahora</a>
-            <a href="/users/add" class="btn btn-secondary btn-lg">Registrar Mi Empresa</a>
+            <a href="/business/add" class="btn btn-secondary btn-lg">Registrar Mi Empresa</a>
         </div>
         <div class="mt-5">
             <p class="text-muted">¿Por qué elegir TurnoFácil?</p>

@@ -12,7 +12,7 @@
     <?= $this->Html->link(__('New Busines'), ['action' => 'add'], ['class' => 'button float-right']) ?>
     <h3><?= __('Negocios') ?></h3>
     <div class="table-responsive">
-        <table>
+        <table class="table table-striped">
             <thead>
                 <tr>
                     <th><?= $this->Paginator->sort('id') ?></th>

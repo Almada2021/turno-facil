@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Policy;
@@ -18,9 +19,7 @@ class UserBusinesPolicy
      * @param \App\Model\Entity\UserBusines $userBusines
      * @return bool
      */
-    public function canAdd(IdentityInterface $user, UserBusines $userBusines)
-    {
-    }
+    public function canAdd(IdentityInterface $user, UserBusines $userBusines) {}
 
     /**
      * Check if $user can edit UserBusines
@@ -29,9 +28,7 @@ class UserBusinesPolicy
      * @param \App\Model\Entity\UserBusines $userBusines
      * @return bool
      */
-    public function canEdit(IdentityInterface $user, UserBusines $userBusines)
-    {
-    }
+    public function canEdit(IdentityInterface $user, UserBusines $userBusines) {}
 
     /**
      * Check if $user can delete UserBusines
@@ -40,9 +37,7 @@ class UserBusinesPolicy
      * @param \App\Model\Entity\UserBusines $userBusines
      * @return bool
      */
-    public function canDelete(IdentityInterface $user, UserBusines $userBusines)
-    {
-    }
+    public function canDelete(IdentityInterface $user, UserBusines $userBusines) {}
 
     /**
      * Check if $user can view UserBusines
@@ -53,5 +48,7 @@ class UserBusinesPolicy
      */
     public function canView(IdentityInterface $user, UserBusines $userBusines)
     {
+        // Allow viewing if the user is the owner of the business or has a specific role
+        // $user->id
     }
 }

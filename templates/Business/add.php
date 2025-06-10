@@ -1,31 +1,40 @@
 <?php
+
 /**
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\Busines $busines
  */
 ?>
-<div class="row">
-    <aside class="column">
-        <div class="side-nav">
-            <h4 class="heading"><?= __('Actions') ?></h4>
-            <?= $this->Html->link(__('List Business'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
-        </div>
-    </aside>
-    <div class="column column-80">
-        <div class="business form content">
-            <?= $this->Form->create($busines) ?>
-            <fieldset>
-                <legend><?= __('Add Busines') ?></legend>
-                <?php
-                    echo $this->Form->control('name');
-                    echo $this->Form->control('description');
-                    echo $this->Form->control('address');
-                    echo $this->Form->control('phone');
-                    echo $this->Form->control('email');
-                ?>
-            </fieldset>
-            <?= $this->Form->button(__('Submit')) ?>
-            <?= $this->Form->end() ?>
+<header>
+    <?= $this->element('header') ?>
+</header>
+<div class="row bg-light" style="min-height: 90vh;">
+    <div class="p-5">
+
+        <div class="">
+
+            <div class="column column-80 bg-white rounded-5 p-5">
+                <div class="business form content">
+                    <?= $this->Form->create($busines) ?>
+                    <fieldset>
+                        <legend><?= __('Crear Negocio') ?></legend>
+                        <?php
+                        echo $this->Form->control('name', ['label' => 'Nombre del Negocio']);
+                        echo $this->Form->control('description', ['label' => 'Descripción del Negocio']);
+                        echo $this->Form->control('address', ['label' => 'Dirección del Negocio']);
+                        echo $this->Form->control('phone', ['label' => 'Teléfono del Negocio']);
+                        echo $this->Form->control('email', ['label' => 'Correo Electrónico del Negocio']);
+                        ?>
+                    </fieldset>
+                    <?= $this->Form->button(__('Crear', ['class' => 'btn btn-primary'])) ?>
+                    <?= $this->Form->end() ?>
+                </div>
+            </div>
         </div>
     </div>
+
+
 </div>
+<footer>
+    <?= $this->element('footer') ?>
+</footer>
