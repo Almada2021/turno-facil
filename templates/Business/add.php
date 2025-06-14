@@ -5,9 +5,7 @@
  * @var \App\Model\Entity\Busines $busines
  */
 ?>
-<header>
-    <?= $this->element('header') ?>
-</header>
+
 <div class="row bg-light" style="min-height: 90vh;">
     <div class="p-5">
 
@@ -35,6 +33,3 @@
 
 
 </div>
-<footer>
-    <?= $this->element('footer') ?>
-</footer>

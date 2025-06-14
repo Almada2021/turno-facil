@@ -10,9 +10,7 @@ use chillerlan\QRCode\QRCode;
 $fullUrl = $this->Url->build(['action' => 'view', $busines->id], ['fullBase' => true]);
 
 ?>
-<header>
-    <?= $this->element('header') ?>
-</header>
+
 <div class="row" style="min-height: 90vh;">
     <?php
     // echo '<img src="' . (new QRCode())->render($fullUrl) . '" style="max-height:300px; object-fit:contain" alt="QR Code" />';
@@ -94,6 +92,3 @@ $fullUrl = $this->Url->build(['action' => 'view', $busines->id], ['fullBase' => 
         </div>
     </div> -->
 </div>
-<footer>
-    <?= $this->element('footer') ?>
-</footer>

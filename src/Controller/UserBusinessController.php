@@ -59,7 +59,6 @@ class UserBusinessController extends AppController
         $this->Authorization->skipAuthorization();
         $userBusines = $this->UserBusiness->newEmptyEntity();
         $user = $this->UserBusiness->Users->newEmptyEntity();
-
         if ($this->request->is('post')) {
             // dd($this->request->getData());
             // Remove business_id from user data and role
@@ -71,7 +70,7 @@ class UserBusinessController extends AppController
                 // Set business_id and role for userBusines
                 $data['user_id'] = $user->id;
                 $data['business_id'] = $this->request->getData('business_id');
-                $data['role'] = 'employee';
+                $data['role'] = $this->request->getData('role');
                 $userBusines = $this->UserBusiness->newEmptyEntity();
                 $userBusines = $this->UserBusiness->patchEntity($userBusines, $data);
                 if ($this->UserBusiness->save($userBusines)) {
@@ -103,6 +102,7 @@ class UserBusinessController extends AppController
      */
     public function edit($id = null)
     {
+        $this->Authorization->skipAuthorization();
         $userBusines = $this->UserBusiness->get($id, contain: []);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $userBusines = $this->UserBusiness->patchEntity($userBusines, $this->request->getData());

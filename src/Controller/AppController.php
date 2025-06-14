@@ -19,6 +19,7 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use Cake\Controller\Controller;
+use Cake\Event\EventInterface;
 
 /**
  * Application Controller
@@ -40,6 +41,10 @@ class AppController extends Controller
      * @return void
      */
     // in src/Controller/AppController.php
+    public function beforeRender(EventInterface $event)
+    {
+        $this->viewBuilder()->setLayout('/default');
+    }
     public function beforeFilter(\Cake\Event\EventInterface $event)
     {
         parent::beforeFilter($event);

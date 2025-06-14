@@ -13,7 +13,7 @@
                 <li class="list-inline-item"><i class="bi bi-check-circle text-success"></i> Fácil de usar</li>
                 <li class="list-inline-item"><i class="bi bi-check-circle text-success"></i> Aumenta tus reservas</li>
                 <li class="list-inline-item"><i class="bi bi-check-circle text-success"></i> Mejora la experiencia de tus clientes</li>
-                <li class="list-inline-item"><i class="bi bi-check-circle text-success"></i> Open Source</li>
+                <li class="list-inline-item"><i class="bi bi-check-circle text-success"></i> Open Development</li>
             </ul>
         </div>
     </div>

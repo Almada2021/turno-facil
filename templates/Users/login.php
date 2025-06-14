@@ -1,8 +1,6 @@
 <!-- in /templates/Users/login.php -->
-<header>
-    <?= $this->element('header') ?>
-</header>
-<div class="users form ">
+
+<div class="users form " style="min-height: 90vh;">
     <?= $this->Flash->render() ?>
     <div class="w-75 m-auto bg-light p-4 my-5">
         <h3>Ingresar</h3>

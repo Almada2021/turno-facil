@@ -149,3 +149,34 @@ CREATE TABLE plan_limits (
     -- Claves foráneas
     FOREIGN KEY (plan_id) REFERENCES plans(id) ON DELETE CASCADE
 );
+
+
+/*
+Tabla de Productos
+
+
+*/
+create table product (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    business_id INT NOT NULL,
+    name VARCHAR(100) NOT NULL,
+    description TEXT,
+    price DECIMAL(10, 2) NOT NULL,
+    created DATETIME DEFAULT CURRENT_TIMESTAMP,
+    modified DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    -- Clave foránea
+    FOREIGN KEY (business_id) REFERENCES business(id) ON DELETE CASCADE
+)
+
+create table service (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    business_id INT NOT NULL,
+    name VARCHAR(100) NOT NULL,
+    description TEXT,
+    price DECIMAL(10, 2) NOT NULL,
+    created DATETIME DEFAULT CURRENT_TIMESTAMP,
+    modified DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    time_to_end INT NOT NULL,
+    -- Clave foránea
+    FOREIGN KEY (business_id) REFERENCES business(id) ON DELETE CASCADE
+);

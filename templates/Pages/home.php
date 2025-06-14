@@ -55,18 +55,26 @@ $checkConnection = function (string $name) {
 </head>
 
 <body>
-    <header>
-        <?= $this->element('header') ?>
-    </header>
+    <?php
+
+
+    /**
+     * 
+     *   <header>
+     *      <?= $this->element('header') ?>
+     * </header>
+     * <footer>
+     * <?= $this->element('footer') ?>
+     * </footer>
+     */
+    ?>
     <main>
         <?= $this->element('hero') ?>
         <?= $this->element('carousel') ?>
         <?= $this->element('pricing') ?>
         <?= $this->element('acordion') ?>
     </main>
-    <footer>
-        <?= $this->element('footer') ?>
-    </footer>
+
 </body>
 
 </html>

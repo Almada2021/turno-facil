@@ -14,8 +14,7 @@
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  * @var \App\View\AppView $this
  */
-
-$cakeDescription = 'CakePHP: the rapid development php framework';
+$cakeDescription = 'TurnoFacil - Turnos Online';
 ?>
 <!DOCTYPE html>
 <html>
@@ -29,22 +28,31 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
     </title>
     <?= $this->Html->meta('icon') ?>
 
-    <?= $this->Html->css(['normalize.min', 'milligram.min', 'fonts', 'cake']) ?>
-
+    <?= $this->Html->css(['normalize.min']) ?>
+    <?= $this->Html->charset() ?>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <?php $this->assign('title', 'Turno Facil'); ?>
+    <?php
+    // in the <head>
+    echo $this->Html->css('BootstrapUI.bootstrap.min');
+    echo $this->Html->css(['BootstrapUI./font/bootstrap-icons', 'BootstrapUI./font/bootstrap-icon-sizes']);
+    echo $this->Html->script(['BootstrapUI.bootstrap.bundle.min']);
+    ?>
     <?= $this->fetch('meta') ?>
     <?= $this->fetch('css') ?>
     <?= $this->fetch('script') ?>
 </head>
 
 <body>
-
+    <header>
+        <?= $this->element('header') ?>
+    </header>
     <main class="main">
-        <div class="container">
-            <?= $this->Flash->render() ?>
-            <?= $this->fetch('content') ?>
-        </div>
+        <?= $this->Flash->render() ?>
+        <?= $this->fetch('content') ?>
     </main>
     <footer>
+        <?= $this->element('footer') ?>
     </footer>
 </body>
 

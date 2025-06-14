@@ -15,9 +15,7 @@
  */
 ?>
 <div class="row">
-    <header>
-        <?= $this->element('header') ?>
-    </header>
+
     <div class="column column-80" style="min-height: 90vh;">
         <div class="users form content container">
             <?= $this->Form->create($user) ?>
@@ -62,8 +60,21 @@
                 <fieldset>
                     <legend><?= __('Datos y Permisos') ?></legend>
                     <?php
-                    echo $this->Form->control('business_id', ['options' => $businesses]);
-                    echo $this->Form->control('role', ['options' => ['owner', 'employee']]);
+                    echo $this->Form->control('business_id', [
+                        'options' => $businesses,
+                        'label' => 'Negocio',
+                    ]);
+                    echo $this->Form->control('role', [
+                        // 'options' => ['owner', 'employee'],
+                        'options' => [
+                            'owner' => 'Propietario',
+                            'employee' => 'Empleado'
+                        ],
+                        'labelOptions' => true,
+                        'label' => 'Rol',
+                        'required' => true,
+                        'empty' => 'Selecciona un rol'
+                    ]);
                     ?>
                     <?= $this->Form->button(__('Registrarse'), [
                         'class' => 'btn btn-primary w-100',
@@ -74,4 +85,3 @@
         </div>
     </div>
 </div>
-<?= $this->element('footer') ?>

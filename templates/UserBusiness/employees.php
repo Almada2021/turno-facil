@@ -4,40 +4,47 @@
  * @var \App\View\AppView $this
  * @var iterable<\App\Model\Entity\UserBusines> $userBusiness
  */
+$tranlationsRole = [
+    'owner' => 'Dueño',
+    'employee' => 'Empleado',
+];
 ?>
-<header>
-    <?= $this->element('header') ?>
-</header>
-<div class="userBusiness index content">
-    <?= $this->Html->link(__('New User Busines'), ['action' => 'add'], ['class' => 'button float-right']) ?>
-    <h3><?= __('User Business') ?></h3>
-    <div class="table-responsive">
-        <table>
+
+<div class="userBusiness index content p-4">
+
+    <?= $this->Html->link(__('  Nuevo Empleado'), ['action' => 'add'], [
+        'class' => 'btn btn-primary  bi bi-shop fw-bold ',
+        'title' => 'Para agregar un nuevo Empleado haz click aqui',
+        'aria-label' => 'Agregar Empleado'
+    ]) ?>
+    <h3 class="mt-2"><?= __('Empleados') ?></h3>
+    <div class="table-responsive" style="min-height: 80vh;">
+        <table class="table table-striped">
             <thead>
                 <tr>
-                    <th><?= $this->Paginator->sort('id') ?></th>
-                    <th><?= $this->Paginator->sort('user_id') ?></th>
-                    <th><?= $this->Paginator->sort('business_id') ?></th>
-                    <th><?= $this->Paginator->sort('role') ?></th>
-                    <th><?= $this->Paginator->sort('created') ?></th>
-                    <th><?= $this->Paginator->sort('modified') ?></th>
-                    <th class="actions"><?= __('Actions') ?></th>
+                    <th><?= $this->Paginator->sort('user_id', [
+                            'label' => 'Empleado',
+                        ]) ?></th>
+                    <th><?= $this->Paginator->sort('business_id', [
+                            'label' => 'Negocio',
+                        ]) ?></th>
+                    <th><?= $this->Paginator->sort('role', [
+                            'label' => 'Rol',
+                        ]) ?></th>
+                    <th class="actions"><?= __('Acciones') ?></th>
                 </tr>
             </thead>
             <tbody>
                 <?php foreach ($userBusiness as $userBusines): ?>
                     <tr>
-                        <td><?= $this->Number->format($userBusines->id) ?></td>
                         <td><?= $userBusines->hasValue('user') ? $this->Html->link($userBusines->user->email, ['controller' => 'Users', 'action' => 'view', $userBusines->user->id]) : '' ?></td>
                         <td><?= $userBusines->hasValue('business') ? $this->Html->link($userBusines->business->name, ['controller' => 'Business', 'action' => 'view', $userBusines->business->id]) : '' ?></td>
-                        <td><?= h($userBusines->role) ?></td>
-                        <td><?= h($userBusines->created) ?></td>
-                        <td><?= h($userBusines->modified) ?></td>
+                        <td><?= h($tranlationsRole[$userBusines->role]) ?></td>
                         <td class="actions">
-                            <?= $this->Html->link(__('View'), ['action' => 'view', $userBusines->id]) ?>
-                            <?= $this->Html->link(__('Edit'), ['action' => 'edit', $userBusines->id]) ?>
+                            <?= $this->Html->link(__('Ver'), ['action' => 'view', $userBusines->id]) ?>
+                            <?= $this->Html->link(__('Editar'), ['action' => 'edit', $userBusines->id]) ?>
                             <?= $this->Form->postLink(
-                                __('Delete'),
+                                __('Eliminar'),
                                 ['action' => 'delete', $userBusines->id],
                                 [
                                     'method' => 'delete',
@@ -52,12 +59,12 @@
     </div>
     <div class="paginator">
         <ul class="pagination">
-            <?= $this->Paginator->first('<< ' . __('first')) ?>
-            <?= $this->Paginator->prev('< ' . __('previous')) ?>
+            <?= $this->Paginator->first('<< ' . __('Primero')) ?>
+            <?= $this->Paginator->prev('< ' . __('Anterior')) ?>
             <?= $this->Paginator->numbers() ?>
-            <?= $this->Paginator->next(__('next') . ' >') ?>
-            <?= $this->Paginator->last(__('last') . ' >>') ?>
+            <?= $this->Paginator->next(__('Siguiente') . ' >') ?>
+            <?= $this->Paginator->last(__('Ultimo') . ' >>') ?>
         </ul>
-        <p><?= $this->Paginator->counter(__('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')) ?></p>
+        <p><?= $this->Paginator->counter(__('Pagina {{page}} de {{pages}}, mostrando {{current}} de un total {{count}} ')) ?></p>
     </div>
 </div>

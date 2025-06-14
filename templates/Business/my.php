@@ -5,9 +5,7 @@
  * @var iterable<\App\Model\Entity\Busines> $business
  */
 ?>
-<header>
-    <?= $this->element('header') ?>
-</header>
+
 <div class="business index content p-4" style="min-height: 90vh;">
 
     <?= $this->Html->link(__('  Nuevo negocio'), ['action' => 'add'], [
@@ -68,6 +66,3 @@
         <p><?= $this->Paginator->counter(__('Pagina {{page}} de {{pages}}, Mostrado {{current}} registros de un total de {{count}} Tiendas')) ?></p>
     </div>
 </div>
-<footer>
-    <?= $this->element('footer') ?>
-</footer>
