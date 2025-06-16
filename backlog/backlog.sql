@@ -180,3 +180,5 @@ create table service (
     -- Clave foránea
     FOREIGN KEY (business_id) REFERENCES business(id) ON DELETE CASCADE
 );
+
+ALTER TABLE product ADD COLUMN photo_url TEXT;

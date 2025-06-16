@@ -88,8 +88,11 @@ class UserBusinessController extends AppController
             // $this->Flash->error(__('The user busines could not be saved. Please, try again.'));
         }
         // Send normal user form
+        $userId = $this->Authentication->getIdentity()->get('id');
         $user = $this->UserBusiness->Users->newEmptyEntity();
-        $businesses = $this->UserBusiness->Businesses->find('list', limit: 200)->all();
+        $businesses = $this->UserBusiness->Businesses->find('list', limit: 20)->matching('UserBusiness', function ($q) use ($userId) {
+            return $q->where(['UserBusiness.user_id' => $userId]);
+        });
         $this->set(compact('user', 'userBusines', 'businesses'));
     }
 
