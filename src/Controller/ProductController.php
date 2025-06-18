@@ -73,7 +73,10 @@ class ProductController extends AppController
             }
             $this->Flash->error(__('The product could not be saved. Please, try again.'));
         }
-        $businesses = $this->Product->Businesses->find('list', limit: 200)->all();
+        $userId = $this->Authentication->getIdentity()->get('id');
+        $businesses = $this->Product->Businesses->find('list', limit: 20)->matching('UserBusiness', function ($q) use ($userId) {
+            return $q->where(['UserBusiness.user_id' => $userId]);
+        });
         $this->set(compact('product', 'businesses'));
     }
 

@@ -53,9 +53,15 @@ class BusinessController extends AppController
      */
     public function view($id = null)
     {
+        if (!$id) {
+            $this->Flash->error(__('No se encontro el negocio'));
+            return $this->redirect(['action' => 'index']);
+        }
         $this->Authorization->skipAuthorization();
         $busines = $this->Business->get($id, contain: []);
-        $this->set(compact('busines'));
+        $products = $this->Business->Product->find()->where(['Product.business_id' => $id])
+            ->contain(['Businesses'])->all();
+        $this->set(compact('busines', 'products'));
     }
 
     /**
@@ -66,7 +72,6 @@ class BusinessController extends AppController
     public function add()
     {
         try {
-
             $this->Authorization->skipAuthorization();
             $busines = $this->Business->newEmptyEntity();
             if ($this->request->is('post')) {

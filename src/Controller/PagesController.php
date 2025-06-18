@@ -81,4 +81,11 @@ class PagesController extends AppController
         $this->set('title', 'Contacto');
         return $this->render('contact');
     }
+    public function services()
+    {
+        $business = $this->fetchTable('Business');
+        $this->Authorization->skipAuthorization();
+        $listOfBussiness = $business->find('all')->limit(10)->all();
+        $this->set(compact('listOfBussiness'));
+    }
 }
