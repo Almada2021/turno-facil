@@ -1,4 +1,4 @@
-<footer class="bg-dark text-light py-4">
+<footer class="footer bg-dark text-light py-4">
     <div class="container text-center">
         <p class="mb-2">&copy; 2025 TurnoFácil. Todos los derechos reservados.</p>
         <ul class="list-inline">

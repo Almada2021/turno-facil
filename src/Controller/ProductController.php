@@ -31,6 +31,8 @@ class ProductController extends AppController
      */
     public function index()
     {
+        $session = $this->request->getSession()->read('Auth');
+        // $userRole = $session->UserBusiness->find()
         $query = $this->Product->find()
             ->contain(['Businesses']);
         // $query = $this->Authorization->applyScope($query);
@@ -38,6 +40,22 @@ class ProductController extends AppController
         $product = $this->paginate($query);
 
         $this->set(compact('product'));
+    }
+
+    public function search()
+    {
+        $searchTerm = $this->request->getQuery('query');
+        $businessId = $this->request->getQuery('id');
+
+        $this->Authorization->skipAuthorization();
+
+        $products = $this->Product->find()
+            ->where(['Product.business_id' => $businessId])
+            ->where(['Product.name LIKE' => '%' . $searchTerm . '%'])
+            ->contain(['Businesses'])->all();
+
+        // $this->set(compact('products', 'searchTerm'));
+        dd($products);
     }
 
     /**
@@ -49,6 +67,7 @@ class ProductController extends AppController
      */
     public function view($id = null)
     {
+
         $product = $this->Product->get($id, contain: ['Businesses']);
         $this->Authorization->authorize($product);
         $this->set(compact('product'));
