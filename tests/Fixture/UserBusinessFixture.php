@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Test\Fixture;
@@ -28,7 +29,7 @@ class UserBusinessFixture extends TestFixture
                 'id' => 1,
                 'user_id' => 1,
                 'business_id' => 1,
-                'role' => 'Lorem ipsum dolor sit amet',
+                'role' => 'owner',
                 'created' => '2025-06-09 09:01:19',
                 'modified' => '2025-06-09 09:01:19',
             ],

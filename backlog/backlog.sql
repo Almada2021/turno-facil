@@ -1,6 +1,6 @@
-CREATE DATABASE reservations;
+-- CREATE DATABASE reservations;
 
-use reservations;
+-- use reservations;
 
 CREATE TABLE users (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -36,12 +36,15 @@ CREATE TABLE user_business (
     UNIQUE KEY unique_user_business (user_id, business_id)
 );
 
--- -- Crear índices para mejor rendimiento
+-- Crear índices para mejor rendimiento
 -- CREATE INDEX idx_user_business_user_id ON user_business(user_id);
+
 -- CREATE INDEX idx_user_business_business_id ON user_business(business_id);
+
 -- CREATE INDEX idx_user_business_role ON user_business(role);
--- -- Ejemplos de consultas útiles:
--- -- 1. Obtener todos los negocios de un usuario específico
+
+-- Ejemplos de consultas útiles:
+-- 1. Obtener todos los negocios de un usuario específico
 -- SELECT
 --     b.*,
 --     ub.role
@@ -50,7 +53,8 @@ CREATE TABLE user_business (
 --     INNER JOIN user_business ub ON b.id = ub.business_id
 -- WHERE
 --     ub.user_id = 1;
--- -- 2. Obtener todos los empleados de un negocio específico
+
+-- 2. Obtener todos los empleados de un negocio específico
 -- SELECT
 --     u.*,
 --     ub.role
@@ -59,7 +63,8 @@ CREATE TABLE user_business (
 --     INNER JOIN user_business ub ON u.id = ub.user_id
 -- WHERE
 --     ub.business_id = 1;
--- -- 3. Obtener solo los dueños de un negocio
+
+-- 3. Obtener solo los dueños de un negocio
 -- SELECT
 --     u.*,
 --     ub.role
@@ -69,7 +74,8 @@ CREATE TABLE user_business (
 -- WHERE
 --     ub.business_id = 1
 --     AND ub.role = 'owner';
--- -- 4. Verificar si un usuario es dueño de algún negocio
+
+-- 4. Verificar si un usuario es dueño de algún negocio
 -- SELECT
 --     COUNT(*) as total_businesses_owned
 -- FROM
@@ -77,7 +83,8 @@ CREATE TABLE user_business (
 -- WHERE
 --     user_id = 1
 --     AND role = 'owner';
--- -- 5. Obtener negocios donde el usuario es empleado
+
+-- 5. Obtener negocios donde el usuario es empleado
 -- SELECT
 --     b.*,
 --     ub.role
@@ -87,28 +94,32 @@ CREATE TABLE user_business (
 -- WHERE
 --     ub.user_id = 1
 --     AND ub.role = 'employee';
--- -- Ejemplos de INSERT:
--- -- Insertar un negocio
--- INSERT INTO
---     business (name, description, address, phone, email)
--- VALUES
---     (
---         'Mi Restaurante',
---         'Restaurante de comida casera',
---         'Calle Principal 123',
---         '555-0123',
---         'info@mirestaurante.com'
---     );
--- -- Asociar un usuario como dueño de un negocio
+
+-- Ejemplos de INSERT:
+-- Insertar un negocio
+INSERT INTO
+    business (name, description, address, phone, email)
+VALUES
+    (
+        'Mi Restaurante',
+        'Restaurante de comida casera',
+        'Calle Principal 123',
+        '555-0123',
+        'info@mirestaurante.com'
+    );
+
+-- Asociar un usuario como dueño de un negocio
 -- INSERT INTO
 --     user_business (user_id, business_id, role)
 -- VALUES
 --     (1, 1, 'owner');
--- -- Asociar un usuario como empleado de un negocio
+
+-- Asociar un usuario como empleado de un negocio
 -- INSERT INTO
 --     user_business (user_id, business_id, role)
 -- VALUES
 --     (2, 1, 'employee');
+
 CREATE TABLE plans (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
@@ -150,12 +161,11 @@ CREATE TABLE plan_limits (
     FOREIGN KEY (plan_id) REFERENCES plans(id) ON DELETE CASCADE
 );
 
-
 /*
-Tabla de Productos
-
-
-*/
+ Tabla de Productos
+ 
+ 
+ */
 create table product (
     id INT AUTO_INCREMENT PRIMARY KEY,
     business_id INT NOT NULL,
@@ -166,7 +176,7 @@ create table product (
     modified DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     -- Clave foránea
     FOREIGN KEY (business_id) REFERENCES business(id) ON DELETE CASCADE
-)
+);
 
 create table service (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -180,5 +190,3 @@ create table service (
     -- Clave foránea
     FOREIGN KEY (business_id) REFERENCES business(id) ON DELETE CASCADE
 );
-
-ALTER TABLE product ADD COLUMN photo_url TEXT;

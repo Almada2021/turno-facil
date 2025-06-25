@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Test\Fixture;
@@ -19,10 +20,10 @@ class PlansFixture extends TestFixture
     {
         $this->records = [
             [
-                'id' => 1,
+                'id' => null,
                 'name' => 'Lorem ipsum dolor sit amet',
                 'price' => 1,
-                'duration' => 'Lorem ipsum dolor sit amet',
+                'duration' => 'monthly',
                 'created' => '2025-06-09 22:13:12',
                 'modified' => '2025-06-09 22:13:12',
             ],

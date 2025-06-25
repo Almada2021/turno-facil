@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Test\TestCase\Controller;
@@ -23,7 +24,7 @@ class ProductControllerTest extends TestCase
      */
     protected array $fixtures = [
         'app.Product',
-        'app.Businesses',
+        'app.Business',
     ];
 
     /**

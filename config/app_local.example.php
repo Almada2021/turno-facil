@@ -64,8 +64,10 @@ return [
          * The test connection is used during the test suite.
          */
         'test' => [
+            'datasource' => 'Cake\Database\Driver\Mysql',
             'host' => 'localhost',
             //'port' => 'non_standard_port_number',
+            'persistent' => true,
             'username' => 'my_app',
             'password' => 'secret',
             'database' => 'test_myapp',

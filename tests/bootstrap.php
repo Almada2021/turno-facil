@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 /**
@@ -18,6 +19,8 @@ declare(strict_types=1);
 use Cake\Core\Configure;
 use Cake\Datasource\ConnectionManager;
 use Migrations\TestSuite\Migrator;
+use Cake\TestSuite\Fixture\SchemaLoader;
+
 
 /**
  * Test runner bootstrap.
@@ -63,4 +66,7 @@ session_id('cli');
 // use Cake\TestSuite\Fixture\SchemaLoader;
 // (new SchemaLoader())->loadSqlFiles('./tests/schema.sql', 'test');
 
-(new Migrator())->run();
+(new SchemaLoader())->loadSqlFiles('/home/talmada908/Desktop/dev/cake-php/reservations-app/backlog/backlog.sql', 'test');
+
+
+// (new Migrator())->run();

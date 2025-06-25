@@ -1,0 +1,11 @@
+PHPUnit 10.5.47 by Sebastian Bergmann and contributors.
+
+Runtime:       PHP 8.3.6
+Configuration: /home/talmada908/Desktop/dev/cake-php/reservations-app/phpunit.xml.dist
+
+....IIIII.....IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII                 49 / 49 (100%)
+
+Time: 00:01.313, Memory: 26.00 MB
+
+OK, but there were issues!
+Tests: 49, Assertions: 20, Incomplete: 40.
