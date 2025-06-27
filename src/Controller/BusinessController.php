@@ -61,6 +61,9 @@ class BusinessController extends AppController
         $busines = $this->Business->get($id, contain: []);
         $products = $this->Business->Product->find()->where(['Product.business_id' => $id])
             ->contain(['Businesses'])->all();
+        $services = $this->Business->Service->find()->where(['Service.business_id' => $id])
+            ->all();
+        // dd($products->toArray()[0]->business);
         $this->set(compact('busines', 'products'));
     }
 

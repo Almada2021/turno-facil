@@ -43,5 +43,6 @@ class AppView extends UIView
     {
         parent::initialize();
         $this->initializeUI();
+        $this->addHelper('Navigation');
     }
 }

@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Model\Table;
@@ -96,5 +97,34 @@ class UserBusinessTable extends Table
         $rules->add($rules->existsIn(['business_id'], 'Businesses'), ['errorField' => 'business_id']);
 
         return $rules;
+    }
+    public function userHasBusiness(int $userId): bool
+    {
+        return $this->exists(['user_id' => $userId]);
+    }
+    public function getUserBusinesses(int $userId): SelectQuery
+    {
+        return $this->find()
+            ->contain(['Business', 'Users'])
+            ->where(['user_id' => $userId]);
+    }
+
+    public function userIsOwner(int $userId): bool
+    {
+        return $this->exists([
+            'user_id' => $userId,
+            'role' => 'owner'
+        ]);
+    }
+    public function getUserRoleInBusiness(int $userId, int $businessId): ?string
+    {
+        $userBusiness = $this->find()
+            ->where([
+                'user_id' => $userId,
+                'business_id' => $businessId
+            ])
+            ->first();
+
+        return $userBusiness ? $userBusiness->role : null;
     }
 }

@@ -51,6 +51,9 @@ class BusinessTable extends Table
         $this->hasMany('Product', [
             'foreignKey' => 'business_id',
         ]);
+        $this->hasMany('Service', [
+            'foreignKey' => 'business_id',
+        ]);
         $this->addBehavior('Timestamp');
     }
 

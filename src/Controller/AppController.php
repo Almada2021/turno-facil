@@ -51,6 +51,9 @@ class AppController extends Controller
         // for all controllers in our application, make index and view
         // actions public, skipping the authentication check
         $this->Authentication->addUnauthenticatedActions(['display', 'contact']);
+        // Hacer disponible la información del usuario en todas las vistas
+        $user = $this->request->getAttribute('identity');
+        $this->set('currentUser', $user);
     }
     public function initialize(): void
     {
