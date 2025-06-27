@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Controller;
@@ -30,11 +31,10 @@ class ServiceController extends AppController
      */
     public function index()
     {
+        $this->Authorization->skipAuthorization();
         $query = $this->Service->find()
             ->contain(['Businesses']);
-        $query = $this->Authorization->applyScope($query);
         $service = $this->paginate($query);
-
         $this->set(compact('service'));
     }
 
@@ -48,7 +48,7 @@ class ServiceController extends AppController
     public function view($id = null)
     {
         $service = $this->Service->get($id, contain: ['Businesses']);
-        $this->Authorization->authorize($service);
+        $this->Authorization->skipAuthorization();
         $this->set(compact('service'));
     }
 
@@ -60,7 +60,8 @@ class ServiceController extends AppController
     public function add()
     {
         $service = $this->Service->newEmptyEntity();
-        $this->Authorization->authorize($service);
+        // $this->Authorization->authorize($service);
+        $this->Authorization->skipAuthorization();
         if ($this->request->is('post')) {
             $service = $this->Service->patchEntity($service, $this->request->getData());
             if ($this->Service->save($service)) {
@@ -84,7 +85,7 @@ class ServiceController extends AppController
     public function edit($id = null)
     {
         $service = $this->Service->get($id, contain: []);
-        $this->Authorization->authorize($service);
+        $this->Authorization->skipAuthorization();
         if ($this->request->is(['patch', 'post', 'put'])) {
             $service = $this->Service->patchEntity($service, $this->request->getData());
             if ($this->Service->save($service)) {

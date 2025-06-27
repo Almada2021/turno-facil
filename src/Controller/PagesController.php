@@ -88,4 +88,8 @@ class PagesController extends AppController
         $listOfBussiness = $business->find('all')->limit(10)->all();
         $this->set(compact('listOfBussiness'));
     }
+    public function manage()
+    {
+        $this->Authorization->skipAuthorization();
+    }
 }

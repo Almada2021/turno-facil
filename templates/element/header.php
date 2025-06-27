@@ -54,9 +54,9 @@ $route = $this->request->getParam('action');
                         <i class=" bi mx-2 bi-shop"></i>
                         <a class=" nav-link active text-dark fw-bold " aria-current="page" href="/my-businesses">Negocios</a>
                     </li>
-                    <li class="nav-item rounded d-flex align-items-center justify-content-md-center px-2 pt-1 <?= $route === 'product-services' ? '  text-decoration-underline' : '' ?>" ">
+                    <li class="nav-item rounded d-flex align-items-center justify-content-md-center px-2 pt-1 <?= $route === 'manage' ? '  text-decoration-underline' : '' ?>" ">
                         <i class=" bi mx-2 bi-bag"></i>
-                        <a class=" nav-link active text-dark fw-bold " aria-current="page" href="/product">Servicios y Productos</a>
+                        <a class=" nav-link active text-dark fw-bold " aria-current="page" href="/pages/manage">Servicios y Productos</a>
                     </li>
                     <li class="nav-item rounded d-flex align-items-center justify-content-md-center px-2 pt-1 <?= $route === 'pos' ? '  text-decoration-underline' : '' ?>" ">
                         <i class=" bi mx-2 bi-cash-stack"></i>
